@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo ilə Header</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: black;
+    width: 100%;
+    padding-top: 50px;
+}
+
+header img {
+    max-height: 100px;
+    margin-bottom: 15px;
+}
+
+.branch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.branch-line {
+    flex: 1;
+    height: 2px;
+    background-color: #fff;
+    max-width: 50px;
+}
+
+.branch-name {
+    font-weight: 900;
+    font-size: 22px;
+    color: #fff;
+}
+
+.info-section {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: rgba(255,255,255,0.2);
+    color: #000;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+    cursor: pointer;
+    font-size: 14px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    text-decoration: none;
+    z-index: 1;
+}
+
+.info-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Kiçildilmiş bottom-notification */
+.bottom-notification {
+    position: relative;
+    margin: 15px auto 0 auto;
+    background: rgba(255,255,255,0.15);
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 10px;
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    text-align: left;
+    font-size: 12px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.bottom-notification.show {
+    opacity: 1;
+    max-height: 600px;
+}
+
+.bottom-notification > div {
+    display: none;
+    margin-top: 4px;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.bottom-notification > div.active {
+    display: block;
+}
+
+.bottom-notification .store {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* Footer yazısı sabitlənmiş, səhifənin ən aşağısında */
+.footer-note {
+    text-align: center;
+    font-size: 10px;
+    color: #000;
+    padding: 2px 0;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.footer-note::before, .footer-note::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background-color: #000;
+    vertical-align: middle;
+    margin: 0 5px;
+}
+</style>
+</head>
+<body>
+
+<video id="bg-video" autoplay muted loop>
+    <source src="https://cdn.pixabay.com/video/2021/08/19/85590-590014592_large.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+
+<div id="overlay"></div>
+
+<div class="content">
+    <header>
+        <img src="https://irshad.az/images/svg-icons/logo.svg?v=1.6" alt="İrşad Logo">
+    </header>
+
+    <div class="branch-container">
+        <div class="branch-line"></div>
+        <div class="branch-name">LOKBATAN BRANCH</div>
+        <div class="branch-line"></div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-box" id="kollektiv-box">Staff🏆</div>
+        <div class="info-box" id="store-box">Information📄</div>
+        <a href="https://irshad.az/" target="_blank" class="info-box">Official site🌐</a>
+    </div>
+
+    <div class="bottom-notification" id="bottom-notification">
+        <div class="kollektiv" id="kollektiv-info">
+            <div class="manager"><strong>💼​Mağaza müdürü:</strong> Kazımov Qəhrəman</div>
+            <div class="treasurers"><strong>💵Xəzinadarlar:</strong> Əzimov Saleh, Əhmədov Musa</div>
+            <div class="phone"><strong>📱Telefon şöbəsi:</strong> Zeynalov Nahid, Səmədli Vüqar, Ağammədov Əlisa</div>
+            <div class="household"><strong>🏠​Məişət şöbəsi:</strong> Tağıyev Ülvi, Alməmmədov Mühit, Alıyev Vüqar</div>
+            <div class="accessory"><strong>🎮​Aksesuar şöbəsi:</strong> Eminov Mirkazım, Bağırzadə Anar, Mehdiyev Ələkbər</div>
+        </div>
+        <div class="store" id="store-info">
+            <p>🏛️​3 mart 2020-ci il tarixində İrşad Electronics-in Lökbatan filialı öz fəaliyyətinə başladı. Yeni filial müasir texnologiya məhsulları və elektronika avadanlıqları ilə xidmət göstərir. Sakinlər üçün daha yaxın və rahat alış-veriş imkanı yaradan filial, yüksək səviyyəli xidmət və geniş məhsul çeşidi təqdim edir.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer yazısı sabitlənmiş şəkildə -->
+<div class="footer-note">Design by Alihuseynovich</div>
+
+<script>
+const kollektivBox = document.getElementById('kollektiv-box');
+const storeBox = document.getElementById('store-box');
+const bottomNotification = document.getElementById('bottom-notification');
+const kollektivInfo = document.getElementById('kollektiv-info');
+const storeInfo = document.getElementById('store-info');
+
+[kollektivBox, storeBox].forEach(box => {
+    box.addEventListener('click', () => {
+        if(box.id === 'kollektiv-box'){
+            if(kollektivInfo.classList.contains('active')){
+                kollektivInfo.classList.remove('active');
+                bottomNotification.classList.remove('show');
+            } else {
+                kollektivInfo.classList.add('active');
+                storeInfo.classList.remove('active');
+                bottomNotification.classList.add('show');
+            }
+        } else if(box.id === 'store-box'){
+            if(storeInfo.classList.contains('active')){
+                storeInfo.classList.remove('active');
+                bottomNotification.classList.remove('show');
+            } else {
+                storeInfo.classList.add('active');
+                kollektivInfo.classList.remove('active');
+                bottomNotification.classList.add('show');
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
